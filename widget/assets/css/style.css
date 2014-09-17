@@ -1,0 +1,151 @@
+
+
+/************************
+****** Page Layout ******
+************************/
+
+@media screen and (min-width:1421px) {
+	#content { background-color:white; margin-left:260px; max-width:100%; margin-right:405px; padding:22px; }
+	#panel-right { background-color:white; width:380px; }
+}
+
+@media screen and (min-width:1121px) and (max-width:1420px) {
+	#content { background-color:white; margin-left:260px; max-width:100%; margin-right:10px; padding:22px; }
+}
+
+@media screen and (min-width:921px) and (max-width:1120px) {
+	#content { background-color:white; margin-left:260px; margin-right:10px; padding:16px; }
+}
+
+@media screen and (min-width:501px) and (max-width:920px) {
+	#content { background-color:white; margin-left:0px; margin-right:10px; padding:12px; }
+}
+
+@media screen and (max-width:500px) {
+	#content { background-color:white; margin-left:0px; padding:10px; }
+}
+
+#panel-nav { width:245px; }
+
+
+/***********************************
+****** Page Layout - Standard ******
+***********************************
+
+@media screen and (min-width:1121px) {
+	#content-wrap { margin-top:10px; min-height:800px; }
+	#content { background-color:white; margin-left:415px; margin-right:10px; padding:22px; }
+	
+	#panel { float:left; width:400px; }
+}
+
+@media screen and (min-width:921px) and (max-width:1120px) {
+	#content-wrap { margin-top:10px; min-height:800px; }
+	#content { background-color:white; margin-left:315px; margin-right:10px; padding:22px; }
+	
+	#panel { float:left; width:300px; }
+}
+
+@media screen and (min-width:501px) and (max-width:920px) {
+	#content-wrap { margin-top:10px; min-height:800px; }
+	#content { background-color:white; margin-left:70px; margin-right:10px; padding:18px; }
+}
+
+@media screen and (max-width:500px) {
+	#content-wrap { min-height:500px; }
+	#content { background-color:white; margin-left:0px; padding:14px; }
+}
+
+#panel-nav { width:230px; }
+
+*/
+
+/****************************
+****** Left Navigation ******
+****************************/
+
+#upanel-navigation { background-color:white;border:solid 1px #c0c0c0; margin-bottom:7px; width:100%; }
+
+.uPanel-link
+{
+	background-color:white;
+	display:block;
+	width:100%;
+	height:60px;
+	line-height:30px;
+	vertical-align:middle;
+	border-bottom:1px solid #e2e2e1;
+	position:relative;
+	
+	color:#475055;
+}
+
+.uPanel-link:visited { color:#475055; }
+.uPanel-link:hover { background-color:#fb7c7c; color:white; }
+
+.uPanel-link>img { position:absolute; top:7px; left:7px; }
+
+.uPanel-active { background-color:#ea6060; }
+.uPanel-active>.uPanel-title { color:white; font-weight:bold; }
+.uPanel-active>.uPanel-desc { color:white; }
+
+.uPanel-icon
+{
+	position:absolute;
+	left:20px;
+	top:18px;
+	font-size:22px;
+}
+
+.uPanel-title { position:absolute; left: 65px; top:5px; }
+.uPanel-desc { position:absolute; left:65px; top:25px; font-size:0.8em; }
+
+
+/*************************
+****** Feed Styling ******
+*************************/
+
+.comment { min-height:60px; border:1px solid #c0c0c0; border-bottom:none; background-color:white; padding-top:18px; }
+.comment:nth-last-child(2) { border-bottom:1px solid #c0c0c0; }
+
+.comment-left { float:left; width:65px; padding:0px 5px 10px 20px; }
+.comment-right { margin-left: 20px; }
+
+.comment-data { float:left; font-size:16px; }
+.comment-data span { color:#152840; font-weight:bold; }
+.comment-data>a { color:#5d5d5d; }
+.comment-data>a:visited { color:#5d5d5d; }
+.comment-data>a:hover { color:#152840; }
+
+.comment-time-post { float:right; color:#b2b2b2; padding-right:22px; }
+
+.comment-message { display:inline-block; width:100%; padding-top:4px; color:#475055; font-size:16px; line-height:24px; }
+
+.comment-image { width:100%; padding-top:14px; }
+
+.comment-wrap { width:100%; }
+.comment-wrap>.extralinks { font-size:14px; text-align:right;padding:5px 22px 10px 0; }
+.comment-wrap>.extralinks a { padding-left:32px; }
+
+.comment-repost { color:gray; padding:2px 0px 2px 0px; }
+
+/* Responsive Images */
+.post-image { width:100%; }
+.post-image-mini { max-width:100%; }
+
+/* Fluid Video Container, thanks to "AvexDesigns.com/responsive-youtube-embed/" */
+.video-embed-flex {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-embed-flex iframe,
+.video-embed-flex object,
+.video-embed-flex embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
