@@ -44,9 +44,9 @@ class PullNotifications extends API {
 /****** API Variables ******/
 	public $isPrivate = true;			// <bool> TRUE if this API is private (requires an API Key), FALSE if not.
 	public $encryptType = "fast";		// <str> The encryption algorithm to use for response, or "" for no encryption.
-	public $allowedSites = array();		// <int:str> the sites to allow the API to connect with. Default is all sites.
+	public $allowedSites = array("auth");		// <int:str> the sites to allow the API to connect with. Default is all sites.
 	public $microCredits = 100;			// <int> The cost in microcredits (1/10000 of a credit) to access this API.
-	public $minClearance = 8;			// <int> The clearance level required to use this API.
+	public $minClearance = 6;			// <int> The clearance level required to use this API.
 	
 	
 /****** Run the API ******/
@@ -68,7 +68,7 @@ class PullNotifications extends API {
 		// Cycle through the list of notifications provided and add them to the response packet
 		foreach($results as $note)
 		{
-			$packet[] = array($note['site_handle'], (int) $note['uni_id'], (int) $note['sender_id'], $note['message'], $note['url'], (int) $note['date_created']);
+			$packet[] = array($note['note_type'], (int) $note['uni_id'], (int) $note['sender_id'], $note['message'], $note['url'], (int) $note['date_created']);
 		}
 		
 		return $packet;

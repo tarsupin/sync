@@ -17,9 +17,9 @@ Uni-Sites want to inform UniFaction of the alerts they provide. To do so, they n
 	
 	// Prepare the Packet with list of notifications
 	$packet = array(
-		array($uniID, $senderID, $message, $url, $dateCreated, [$uniIDList])
-	,	array($uniID, $senderID, $message, $url, $dateCreated, [$uniIDList])
-	,	array($uniID, $senderID, $message, $url, $dateCreated, [$uniIDList])
+		array($noteType, $uniID, $senderID, $message, $url, $dateCreated, [$uniIDList])
+	,	array($noteType, $uniID, $senderID, $message, $url, $dateCreated, [$uniIDList])
+	,	array($noteType, $uniID, $senderID, $message, $url, $dateCreated, [$uniIDList])
 	);
 	
 	// Set the API to use the Post Method
@@ -59,7 +59,7 @@ class PushNotifications extends API {
 		
 		foreach($this->data as $note)
 		{
-			Database::query("INSERT INTO sync_notifications (site_handle, uni_id, sender_id, message, url, date_created) VALUES (?, ?, ?, ?, ?, ?)", array($this->apiHandle, $note[0], $note[1], $note[2], $note[3], $note[4]));
+			Database::query("INSERT INTO sync_notifications (note_type, uni_id, sender_id, message, url, date_created) VALUES (?, ?, ?, ?, ?, ?)", array($note[0], $note[1], $note[2], $note[3], $note[4], $note[5]));
 		}
 		
 		Database::endTransaction();
