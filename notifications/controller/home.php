@@ -1,5 +1,7 @@
 <?php if(!defined("CONF_PATH")) { die("No direct script access allowed."); }
 
+AppNotifications::add(1, "http://auth.test", "Time: " . date("M jS, Y", mt_rand(0, 1500000000)));
+
 // Run Global Script
 require(APP_PATH . "/includes/global.php");
 
@@ -14,6 +16,7 @@ echo '
 <div id="content">' . Alert::display();
 
 
+AppNotifications::purge(1);
 
 echo '
 </div>';

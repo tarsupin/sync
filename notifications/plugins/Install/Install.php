@@ -18,23 +18,6 @@ abstract class Install extends Installation {
 	)					// RETURNS <bool>
 	
 	{
-		Database::exec("
-		CREATE TABLE IF NOT EXISTS `sync_notifications`
-		(
-			`uni_id`				int(10)			unsigned	NOT NULL	DEFAULT '0',
-			`sender_id`				int(10)			unsigned	NOT NULL	DEFAULT '0',
-			
-			`note_type`				varchar(12)					NOT NULL	DEFAULT '',
-			`message`				varchar(150)				NOT NULL	DEFAULT '',
-			`url`					varchar(64)					NOT NULL	DEFAULT '',
-			
-			`date_created`			int(10)			unsigned	NOT NULL	DEFAULT '0',
-			
-			INDEX (`date_created`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-		");
-		
-		// Make sure the newly installed tables exist
-		return DatabaseAdmin::columnsExist("sync_notifications", array("uni_id", "message"));
+		return true;
 	}
 }
