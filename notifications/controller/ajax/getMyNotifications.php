@@ -16,7 +16,15 @@ if($_POST['enc'] != Security::jsEncrypt($_POST['username']))
 }
 
 // Retrieve the UniID and Notification Count of the user being called
-$userData = User::getDataByHandle($_POST['username'], "uni_id, notify_count");
+if(!$userData = User::getDataByHandle($_POST['username'], "uni_id, notify_count"))
+{
+	User::silentRegister($_POST['username']);
+	
+	if(!$userData = User::getDataByHandle($_POST['username'], "uni_id, notify_count"))
+	{
+		exit;
+	}
+}
 
 // Get the list of notifications for the user
 $notifications = AppNotifications::get((int) $userData['uni_id'], 1, 5);

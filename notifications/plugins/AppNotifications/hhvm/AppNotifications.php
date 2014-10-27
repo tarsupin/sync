@@ -1,4 +1,4 @@
-<?php if(!defined("CONF_PATH")) { die("No direct script access allowed."); } /*
+<?hh if(!defined("CONF_PATH")) { die("No direct script access allowed."); } /*
 
 -----------------------------------------------
 ------ About the AppNotifications Plugin ------
@@ -21,10 +21,10 @@ abstract class AppNotifications {
 /****** Get a list of a user's notifications ******/
 	public static function get
 	(
-		$uniID				// <int> The UniID to get notifications from.
-	,	$page = 1			// <int> The page to start at (pagination value).
-	,	$returnNum = 5		// <int> The total number of rows to return.
-	)						// RETURNS <int:[str:mixed]> the list of notifications for the user.
+		int $uniID				// <int> The UniID to get notifications from.
+	,	int $page = 1			// <int> The page to start at (pagination value).
+	,	int $returnNum = 5		// <int> The total number of rows to return.
+	): array <int, array<str, mixed>>						// RETURNS <int:[str:mixed]> the list of notifications for the user.
 	
 	// $notifications = AppNotifications::get($uniID, [$page], [$returnNum]);
 	{
@@ -35,10 +35,10 @@ abstract class AppNotifications {
 /****** Add a notification ******/
 	public static function add
 	(
-		$uniID			// <int> The UniID to add a notification to.
-	,	$url			// <str> The URL that is assigned to the notification.
-	,	$message		// <str> The message of the notification.
-	)					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
+		int $uniID			// <int> The UniID to add a notification to.
+	,	string $url			// <str> The URL that is assigned to the notification.
+	,	string $message		// <str> The message of the notification.
+	): bool					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
 	
 	// AppNotifications::add($uniID, $url, $message);
 	{
@@ -59,10 +59,10 @@ abstract class AppNotifications {
 /****** Add a notification to multiple users at once ******/
 	public static function addMultiple
 	(
-		$uniIDList		// <int:int> An array of UniID's to grant the notifications to.
-	,	$url			// <str> The URL that is assigned to the notification.
-	,	$message		// <str> The message of the notification.
-	)					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
+		array <int, int> $uniIDList		// <int:int> An array of UniID's to grant the notifications to.
+	,	string $url			// <str> The URL that is assigned to the notification.
+	,	string $message		// <str> The message of the notification.
+	): bool					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
 	
 	// AppNotifications::addMultiple($uniIDList, $url, $message);
 	{
@@ -108,8 +108,8 @@ abstract class AppNotifications {
 /****** Purge a user's notifications ******/
 	public static function purge
 	(
-		$uniID			// <int> The UniID to purge old notifications for.
-	)					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
+		int $uniID			// <int> The UniID to purge old notifications for.
+	): bool					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
 	
 	// AppNotifications::purge($uniID);
 	{
@@ -130,8 +130,8 @@ abstract class AppNotifications {
 /****** Increment the number of user's notifications by 1 ******/
 	public static function incrementCount
 	(
-		$uniID			// <int> The UniID to increment the notifications for.
-	)					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
+		int $uniID			// <int> The UniID to increment the notifications for.
+	): bool					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
 	
 	// AppNotifications::incrementCount($uniID);
 	{
@@ -153,8 +153,8 @@ abstract class AppNotifications {
 /****** Reset the user's notifications to 0 ******/
 	public static function resetCount
 	(
-		$uniID			// <int> The UniID to increment the notifications for.
-	)					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
+		int $uniID			// <int> The UniID to increment the notifications for.
+	): bool					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
 	
 	// AppNotifications::resetCount($uniID);
 	{
