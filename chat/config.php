@@ -60,8 +60,30 @@ if(ENVIRONMENT == "production") {
 	define("CDN", "http://cdn.unifaction.com");
 	
 	// Important Configurations
-	$config['site-domain'] = $chatServer . ".sync.unifaction.com";		#production
+	$config['site-domain'] = $chatServer . ".sync.unifaction.com";
 	$config['admin-email'] = "info@unifaction.com";
+	
+	// = "chat0.sync.unifaction.com";		#production
+	// = "chat1.sync.unifaction.com";		#production
+	// = "chat2.sync.unifaction.com";		#production
+	// = "chat3.sync.unifaction.com";		#production
+	// = "chat4.sync.unifaction.com";		#production
+	// = "chat5.sync.unifaction.com";		#production
+	// = "chat6.sync.unifaction.com";		#production
+	// = "chat7.sync.unifaction.com";		#production
+	// = "chat8.sync.unifaction.com";		#production
+	// = "chat9.sync.unifaction.com";		#production
+	
+	// = "pchat0.sync.unifaction.com";		#production
+	// = "pchat1.sync.unifaction.com";		#production
+	// = "pchat2.sync.unifaction.com";		#production
+	// = "pchat3.sync.unifaction.com";		#production
+	// = "pchat4.sync.unifaction.com";		#production
+	// = "pchat5.sync.unifaction.com";		#production
+	// = "pchat6.sync.unifaction.com";		#production
+	// = "pchat7.sync.unifaction.com";		#production
+	// = "pchat8.sync.unifaction.com";		#production
+	// = "pchat9.sync.unifaction.com";		#production
 }
 
 /************************************
@@ -74,7 +96,7 @@ else if(ENVIRONMENT == "development") {
 	define("CDN", "http://cdn.phptesla.com");
 	
 	// Important Configurations
-	$config['site-domain'] = $chatServer . ".sync.phptesla.com";		#development
+	$config['site-domain'] = $chatServer . ".sync.phptesla.com";
 	$config['admin-email'] = "info@phptesla.com";
 }
 
