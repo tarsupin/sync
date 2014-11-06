@@ -46,6 +46,6 @@ class RemoveFriendAPI extends API {
 		}
 		
 		// Remove the friends
-		AppFriends::remove($this->data['uni_id'], $this->data['friend_id']);
+		return AppFriends::remove($this->data['uni_id'], $this->data['friend_id']);
 	}
 }

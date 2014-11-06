@@ -16,7 +16,7 @@ echo '
 
 
 AppFriends::updateActivity(Me::$id);
-//AppFriends::updateActiveFriendList(Me::$id);
+AppFriends::updateActiveFriendList(Me::$id);
 
 
 echo '

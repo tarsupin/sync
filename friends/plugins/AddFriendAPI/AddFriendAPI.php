@@ -15,7 +15,6 @@ This API allows a user to add a friend.
 	$packet = array(
 		"uni_id"		=> $uniID
 	,	"friend_id"		=> $friendID
-	,	"request"		=> false			// Set to TRUE if this is a request, FALSE if not.
 	);
 	
 	// Run the API
@@ -44,17 +43,6 @@ class AddFriendAPI extends API {
 		if(!isset($this->data['uni_id']) or !isset($this->data['friend_id']))
 		{
 			return false;
-		}
-		
-		if(!isset($this->data['request']))
-		{
-			$this->data['request'] = true;
-		}
-		
-		// Run a friend request (if applicable)
-		if($this->data['request'])
-		{
-			return AppFriends::request($this->data['uni_id'], $this->data['friend_id']);
 		}
 		
 		// Force a friend update (if not a request)

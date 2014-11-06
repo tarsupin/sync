@@ -16,7 +16,14 @@ if($_POST['enc'] != Security::jsEncrypt($_POST['username']))
 }
 
 // Retrieve the UniID
-$uniID = User::getIDByHandle($_POST['username']);
+if(!$uniID = User::getIDByHandle($_POST['username']))
+{
+	// Attempt to silently register the user so that the functions can work appropriately
+	if(!User::silentRegister($uniID))
+	{
+		exit;
+	}
+}
 
 // Update your online activity
 AppFriends::updateActivity($uniID);

@@ -21,9 +21,9 @@ When this content is being loaded, it will apply a "verb". The system will autom
 	
 	// Prepare the API Packet
 	$packet = array(
-		"hashtag"			=> "roleplaying"				// The top-tier hashtag to use for filtering purposes
+		"hashtag"			=> "roleplaying"				// The hashtag to use for filtering purposes
 	,	"categories"		=> array("people", "articles")	// The categories that your widget will show
-	,	"view_count"		=> 100							// An optional setting; number of times it will be shown
+	,	"view_count"		=> 250							// An optional setting; number of times it will be shown
 	,	"number_slots"		=> 3							// The number of content slots to return (generally 2 or 3)
 	);
 	
@@ -54,35 +54,42 @@ class FeaturedWidgetAPI extends API {
 	// $this->runAPI()
 	{
 		// Make sure the proper data was sent
-		if(!isset($this->data['categories']) or !isset($this->data['hashtag']))
+		if(!isset($this->data['hashtag']))
 		{
 			return array();
 		}
 		
 		// Prepare Values
+		$hashtag = Sanitize::variable($this->data['hashtag']);
 		$slots = isset($this->data['number_slots']) ? (int) $this->data['number_slots'] : 2;
-		$cat = $this->data['categories'][mt_rand(0, count($this->data['categories']) - 1)];
+		$pullCount = (isset($this->data['view_count'])) ? (int) $this->data['view_count'] : 100;
+		$categories = isset($this->data['categories']) ? $this->data['categories'] : array();
 		
-		// Retrieve content based on the parameters provided
-		if(!$verb = Database::selectValue("SELECT DISTINCT verb FROM widget_featured WHERE hashtag=? AND category=? ORDER BY RAND() LIMIT 1", array($this->data['hashtag'], $cat)))
-		{
-			return array();
-		}
+		shuffle($categories);
 		
-		// Pull the necessary data
-		if($widgetData = Database::selectMultiple("SELECT id, hashtag, category, verb, title, description, url FROM widget_featured WHERE hashtag=? AND category=? AND verb=? ORDER BY RAND() LIMIT " . $slots, array($this->data['hashtag'], $cat, $verb)))
+		// Loop through the categories
+		foreach($categories as $category)
 		{
-			// Update the values
-			$pullCount = (isset($this->data['view_count'])) ? (int) $this->data['view_count'] : 100;
-			
-			foreach($widgetData as $wData)
+			// Retrieve content based on the parameters provided
+			if(!$verb = AppFeatured::getRandomVerb($hashtag, $category))
 			{
-				Database::query("UPDATE widget_featured SET views=views+? WHERE id=? LIMIT 1", array($pullCount, $wData['id']));
+				continue;
 			}
+			
+			// Pull the Widget Data
+			if(!$widgetData = AppFeatured::pull($hashtag, $category, $verb, $slots))
+			{
+				continue;
+			}
+			
+			// Update the view count for the entries being pulled
+			AppFeatured::updateViews($widgetData, $pullCount);
+			
+			// Return the content
+			return array("category" => $category, "verb" => $verb, "widgetData" => $widgetData);
 		}
 		
-		// Return the content
-		return array("category" => $cat, "verb" => $verb, "widgetData" => $widgetData);
+		return array();
 	}
 	
 }

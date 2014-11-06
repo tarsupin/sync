@@ -26,14 +26,7 @@ abstract class AppFriends {
 	// AppFriends::updateActivity($uniID);
 	{
 		// Check your last activity
-		if(!$lastActivity = (int) Database::selectValue("SELECT last_activity FROM users_activity WHERE uni_id=? LIMIT 1", array($uniID)))
-		{
-			// Attempt to silently register the user so that the functions can work appropriately
-			if(!$uniID = User::silentRegister($uniID))
-			{
-				return;
-			}
-		}
+		$lastActivity = (int) Database::selectValue("SELECT last_activity FROM users_activity WHERE uni_id=? LIMIT 1", array($uniID));
 		
 		// Update your online friends list occasionally
 		if($lastActivity < time() - 25)
