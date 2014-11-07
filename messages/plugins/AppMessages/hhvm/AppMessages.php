@@ -130,7 +130,7 @@ abstract class AppMessages {
 	public static function checkQueue
 	(
 		int $uniID			// <int> The UniID that is having their message queue checked.
-	,	int $microtime		// <int> The timestamp that indicates when to ignore any further queued information.
+	,	float $microtime		// <float> The timestamp that indicates when to ignore any further queued information.
 	): array <int, str>					// RETURNS <int:str> a list of users that have updated since the time designated.
 	
 	// $users = AppMessages::checkQueue($uniID, $microtime);

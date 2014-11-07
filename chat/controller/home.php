@@ -18,17 +18,8 @@ echo '
 
 echo '
 <h3>Welcome to the Chat System</h3>
-<p>Welcome to the chat system.</p>';
+<p>Not sure why you\'re here, but... yeah, hi!</p>
 
-$channel = "Avatar";
-
-$chatServerID = AppChat::getChannelServer($channel);
-var_dump($chatServerID);
-
-$channelID = AppChat::createChannel($channel);
-var_dump($channelID);
-
-echo '
 </div>';
 
 // Display the Footer

@@ -33,7 +33,7 @@ $friendList = AppFriends::getActiveFriendList($uniID, 1, 10);
 
 foreach($friendList as $key => $friend)
 {
-	$friendList[$key]['img'] = ProfilePic::image($friend['uni_id'], "small");
+	$friendList[$key]['img'] = ProfilePic::image((int) $friend['uni_id'], "small");
 }
 
 // Return the JSON

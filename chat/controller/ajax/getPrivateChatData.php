@@ -67,7 +67,7 @@ $response = array();
 
 foreach($messages as $message)
 {
-	$response[] = array("img" => ProfilePic::image($message['uni_id'], "small"), "time" => date("G:i", $message['date_posted']), "message" => $message['message']);
+	$response[] = array("img" => ProfilePic::image((int) $message['uni_id'], "small"), "time" => date("G:i", $message['date_posted']), "message" => $message['message']);
 }
 
 echo json_encode(array("last_time" => $lastTime, "messages" => $response));

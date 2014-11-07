@@ -36,7 +36,7 @@ abstract class AppChat {
 /****** Retrieve a channel server ID (modular) by the channel name ******/
 	public static function getChannelServer
 	(
-		$channel		// <int> The channel name.
+		$channel		// <str> The channel name.
 	)					// RETURNS <int> the chat's server integer.
 	
 	// $chatServerID = AppChat::getChannelServer($channel);
