@@ -53,7 +53,10 @@ class MyFeedAPI extends API {
 		UserFeed::updateFeed($uniID);
 		
 		// Get the User's Feed Posts
-		$contentIDs = UserFeed::getFeedIDs($uniID);
+		if(!$contentIDs = UserFeed::getFeedIDs($uniID))
+		{
+			return array();
+		}
 		
 		// Pull the necessary feed data
 		$feedData = UserFeed::scanFeed($contentIDs);
