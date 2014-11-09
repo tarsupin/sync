@@ -251,8 +251,8 @@ abstract class UserFeed {
 /****** Scan the content to retrieve core feed data ******/
 	public static function scanFeed
 	(
-		$contentIDs			// <int> The array of content IDs to retrieve feed data for.
-	)						// RETURNS <int:[str:mixed]> the core data for the article.
+		$contentIDs		// <int:int> The array of content IDs to retrieve feed data for.
+	)					// RETURNS <int:[str:mixed]> the core data for the article.
 	
 	// $feedData = UserFeed::scanFeed($contentIDs);
 	{

@@ -103,20 +103,28 @@ abstract class UserFeed {
 	
 	
 /****** Update a user's feed ******/
-	public static function updateFeed (
-	): bool					// RETURNS <bool> TRUE if you've updated the feed, FALSE if not.
+	public static function updateFeed
+	(
+		int $uniID		// <int> The UniID of the feed to update.
+	): bool				// RETURNS <bool> TRUE if you've updated the feed, FALSE if not.
 	
-	// UserFeed::updateFeed();
+	// UserFeed::updateFeed($uniID);
 	{
+		// Need to identify when the last feed update was made
+		if(!$lastUpdate = Database::selectOne("SELECT last_feed_update, last_feed_id FROM users WHERE uni_id=? LIMIT 1", array($uniID)))
+		{
+			$lastUpdate = array('last_feed_update' => 0, 'last_feed_id' => 0);
+		}
+		
 		// Only update the feed if you haven't done so recently
-		if(!Me::$loggedIn or Me::$vals['last_feed_update'] > time() - self::$updateDuration)
+		if($lastUpdate['last_feed_update'] > time() - self::$updateDuration)
 		{
 			return false;
 		}
 		
 		// Prepare Values
 		$cycleTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
-		$currentID = Me::$vals['last_feed_id'];
+		$currentID = (int) $lastUpdate['last_feed_id'];
 		$feedIDList = array();
 		
 		/*
@@ -128,7 +136,7 @@ abstract class UserFeed {
 		*/
 		
 		// Get a list of the hashtags you follow, since we'll search each of those independently
-		$htFollowed = self::getHashtagsBoolFormat(Me::$id);
+		$htFollowed = self::getHashtagsBoolFormat($uniID);
 		
 		// Get self::$loopCount entries to search through for the most recent entries
 		while(true)
@@ -166,13 +174,13 @@ abstract class UserFeed {
 		}
 		
 		// Need to update your last feed ID
-		Database::query("UPDATE users SET last_feed_update=?, last_feed_id=? WHERE uni_id=? LIMIT 1", array(time(), $currentID, Me::$id));
+		Database::query("UPDATE users SET last_feed_update=?, last_feed_id=? WHERE uni_id=? LIMIT 1", array(time(), $currentID, $uniID));
 		
 		Database::startTransaction();
 		
 		foreach($feedIDList as $feedID)
 		{
-			Database::query("INSERT INTO feed_display (uni_id, feed_id) VALUES (?, ?)", array(Me::$id, $feedID));
+			Database::query("INSERT INTO feed_display (uni_id, feed_id) VALUES (?, ?)", array($uniID, $feedID));
 		}
 		
 		return Database::endTransaction();
@@ -243,8 +251,8 @@ abstract class UserFeed {
 /****** Scan the content to retrieve core feed data ******/
 	public static function scanFeed
 	(
-		int $contentIDs			// <int> The array of content IDs to retrieve feed data for.
-	): array <int, array<str, mixed>>						// RETURNS <int:[str:mixed]> the core data for the article.
+		array <int, int> $contentIDs		// <int:int> The array of content IDs to retrieve feed data for.
+	): array <int, array<str, mixed>>					// RETURNS <int:[str:mixed]> the core data for the article.
 	
 	// $feedData = UserFeed::scanFeed($contentIDs);
 	{
@@ -262,6 +270,7 @@ abstract class UserFeed {
 			// Recognize Integers
 			$scanData['id'] = (int) $scanData['id'];
 			$scanData['author_id'] = (int) $scanData['author_id'];
+			$scanData['uni_id'] = (int) $scanData['author_id'];
 			$scanData['date_posted'] = (int) $scanData['date_posted'];
 			
 			// Add the entry to the final feed data

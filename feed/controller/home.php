@@ -10,7 +10,7 @@ if(!Me::$loggedIn)
 UserFeed::updateFeed(Me::$id);
 
 // Prepare the User Feed
-UserFeed::prepare(Me::$id);
+UserFeed::prepare();
 
 // Get the User's Feed Posts
 $contentIDs = UserFeed::getFeedIDs(Me::$id);
