@@ -7,10 +7,10 @@ if(!Me::$loggedIn)
 }
 
 // Update the active user's feed (if they're not logged in, it skips them)
-UserFeed::updateFeed();
+UserFeed::updateFeed(Me::$id);
 
 // Prepare the User Feed
-UserFeed::prepare();
+UserFeed::prepare(Me::$id);
 
 // Get the User's Feed Posts
 $contentIDs = UserFeed::getFeedIDs(Me::$id);
