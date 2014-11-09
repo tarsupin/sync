@@ -53,6 +53,16 @@ class AppFeatured_config {
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 		");
 		
+		Database::exec("
+		CREATE TABLE IF NOT EXISTS `widget_parents`
+		(
+			`hashtag`				varchar(22)					NOT NULL	DEFAULT '',
+			`parent`				varchar(22)					NOT NULL	DEFAULT '',
+			
+			UNIQUE (`hashtag`, `parent`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+		");
+		
 		return $this->isInstalled();
 	}
 	
@@ -66,8 +76,9 @@ class AppFeatured_config {
 		// Make sure the newly installed tables exist
 		$pass1 = DatabaseAdmin::columnsExist("widget_featured", array("id", "title"));
 		$pass2 = DatabaseAdmin::columnsExist("widget_featured_pull", array("hashtag", "category"));
+		$pass3 = DatabaseAdmin::columnsExist("widget_parents", array("hashtag", "parent"));
 		
-		return ($pass1 and $pass2);
+		return ($pass1 and $pass2 and $pass3);
 	}
 	
 }

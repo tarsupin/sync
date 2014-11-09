@@ -48,6 +48,27 @@ abstract class AppFeatured {
 	}
 	
 	
+/****** Get the parent hashtags of a designated hashtag ******/
+	public static function getParents
+	(
+		string $hashtag	// <str> The hashtag to get the parent of.
+	): array <int, str>				// RETURNS <int:str> the parent hashtag, or array() if there are no parents.
+	
+	// $parentHashtags = AppFeatured::getParents($hashtag);
+	{
+		$parentList = array();
+		
+		$results = Database::selectMultiple("SELECT parent FROM widget_parents WHERE hashtag=?", array($hashtag));
+		
+		foreach($results as $res)
+		{
+			$parentList[] = $res['parent'];
+		}
+		
+		return $parentList;
+	}
+	
+	
 /****** Assign a featured entry to a Hashtag + Category combo ******/
 	public static function assign
 	(
@@ -72,7 +93,25 @@ abstract class AppFeatured {
 	
 	// $verb = AppFeatured::getRandomVerb($hashtag, $category);
 	{
-		return Database::selectValue("SELECT DISTINCT verb FROM widget_featured_pull WHERE hashtag=? AND category=? ORDER BY RAND() LIMIT 1", array($hashtag, $category));
+		// Prepare Values
+		$sqlWhere = "";
+		$sqlArray = array();
+		
+		// Get the hashtag's parent
+		if($parents = AppFeatured::getParents($hashtag))
+		{
+			$parents[] = $hashtag;
+			
+			list($sqlWhere, $sqlArray) = Database::sqlFilters(array("hashtag" => $parents, "category" => array($category)));
+		}
+		else
+		{
+			$sqlWhere = "hashtag=? AND category=?";
+			$sqlArray = array($hashtag, $category);
+		}
+		
+		// Run the query
+		return (string) Database::selectValue("SELECT DISTINCT verb FROM widget_featured_pull WHERE " . $sqlWhere . " ORDER BY RAND() LIMIT 1", $sqlArray);
 	}
 	
 	
@@ -121,6 +160,15 @@ abstract class AppFeatured {
 		$sqlWhere = "p.hashtag=?";
 		$sqlArray = array($hashtag);
 		
+		// Get the hashtag's parent
+		if($parents = AppFeatured::getParents($hashtag))
+		{
+			$parents[] = $hashtag;
+			
+			list($sqlWhere, $sqlArray) = Database::sqlFilters(array("hashtag" => $parents));
+		}
+		
+		// If specifying a category and/or verb, add the appropriate search parameters
 		if($category)
 		{
 			$sqlWhere .= " AND p.category=?";
@@ -133,6 +181,7 @@ abstract class AppFeatured {
 			}
 		}
 		
+		// Run the query
 		return Database::selectMultiple("SELECT f.* FROM widget_featured_pull p INNER JOIN widget_featured f ON p.entry_id=f.id WHERE " . $sqlWhere . " ORDER BY RAND() LIMIT " . ($numReturn + 0), $sqlArray);
 	}
 	
