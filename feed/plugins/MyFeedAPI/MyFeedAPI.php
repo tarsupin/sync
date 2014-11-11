@@ -34,7 +34,7 @@ class MyFeedAPI extends API {
 	
 /****** Run the API ******/
 	public function runAPI (
-	)					// RETURNS <array>
+	)					// RETURNS <int:[str:mixed]>
 	
 	// $this->runAPI()
 	{

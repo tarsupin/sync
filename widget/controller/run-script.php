@@ -40,6 +40,7 @@ AppAdmin::createParent("Fashion", "Entertainment");
 AppAdmin::createParent("Fitness", "Entertainment");
 AppAdmin::createParent("Food", "Entertainment");
 AppAdmin::createParent("Gaming", "Entertainment");
+AppAdmin::createParent("Humor", "Entertainment");
 AppAdmin::createParent("Music", "Entertainment");
 AppAdmin::createParent("Movies", "Entertainment");
 AppAdmin::createParent("Pets", "Entertainment");
@@ -71,6 +72,23 @@ AppAdmin::createParent("Writers", "ContentCreation");
 AppAdmin::createParent("Writing", "ContentCreation");
 
 
+// DIY
+AppAdmin::createParent("DIYAuto", "DIY");
+AppAdmin::createParent("DIYCrafts", "DIY");
+AppAdmin::createParent("DIYOutdoors", "DIY");
+AppAdmin::createParent("DIYProducts", "DIY");
+AppAdmin::createParent("HomeImprovement", "DIY");
+AppAdmin::createParent("InteriorDesign", "DIY");
+
+
+// CurrentEvents
+AppAdmin::createParent("Business", "CurrentEvents");
+AppAdmin::createParent("News", "CurrentEvents");
+AppAdmin::createParent("Politics", "CurrentEvents");
+AppAdmin::createParent("Science", "CurrentEvents");
+AppAdmin::createParent("Tech", "CurrentEvents");
+
+
 
 /***************************
 ****** Generate Lists ******
@@ -93,6 +111,11 @@ AppAdmin::assignEntryByTitle("TV and Web Shows", "Entertainment", "communities",
 AppAdmin::assignEntryByTitle("Writing Community", "Entertainment", "communities", "featured");
 
 
+// DIY
+AppAdmin::assignEntryByTitle("DIY: Auto", "DIY", "communities", "featured");
+AppAdmin::assignEntryByTitle("DIY: Home Improvement", "DIY", "communities", "featured");
+AppAdmin::assignEntryByTitle("Interior Design", "DIY", "communities", "featured");
+
 // ContentCreation
 AppAdmin::assignEntryByTitle("Art Community", "ContentCreation", "communities", "featured");
 AppAdmin::assignEntryByTitle("Programming Community", "ContentCreation", "communities", "featured");
@@ -100,10 +123,20 @@ AppAdmin::assignEntryByTitle("Web Development", "ContentCreation", "communities"
 AppAdmin::assignEntryByTitle("Writing Community", "ContentCreation", "communities", "featured");
 
 
+// CurrentEvents
+AppAdmin::assignEntryByTitle("Business Community", "CurrentEvents", "communities", "featured");
+AppAdmin::assignEntryByTitle("News Community", "CurrentEvents", "communities", "featured");
+AppAdmin::assignEntryByTitle("Politics Community", "CurrentEvents", "communities", "featured");
+AppAdmin::assignEntryByTitle("Science Community", "CurrentEvents", "communities", "featured");
+AppAdmin::assignEntryByTitle("Tech Community", "CurrentEvents", "communities", "featured");
+
+
 // Tech
 AppAdmin::assignEntryByTitle("Book Club", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Gaming Community", "Entertainment", "communities", "featured");
 AppAdmin::assignEntryByTitle("Music Community", "Tech", "communities", "featured");
+AppAdmin::assignEntryByTitle("News Community", "Tech", "communities", "featured");
+AppAdmin::assignEntryByTitle("Politics Community", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Science Community", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Tech Community", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Travel Community", "Tech", "communities", "featured");
