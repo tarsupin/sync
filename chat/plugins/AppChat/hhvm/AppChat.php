@@ -102,7 +102,7 @@ abstract class AppChat {
 	
 	// $messages = AppChat::getMessages($channelID, [$messageCount]);
 	{
-		$messages = Database::selectMultiple("SELECT uni_id, message, date_posted FROM chat_messages WHERE channel_id=? ORDER BY date_posted DESC LIMIT " . ($messageCount + 0), array($channelID));
+		$messages = Database::selectMultiple("SELECT c.uni_id, u.handle, c.message, c.date_posted FROM chat_messages c INNER JOIN users u ON c.uni_id=u.uni_id WHERE c.channel_id=? ORDER BY c.date_posted DESC LIMIT " . ($messageCount + 0), array($channelID));
 		
 		return array_reverse($messages);
 	}
@@ -117,7 +117,7 @@ abstract class AppChat {
 	
 	// $messages = AppChat::getMessagesSinceTime($channelID, $microtime);
 	{
-		$messages = Database::selectMultiple("SELECT uni_id, message, date_posted FROM chat_messages WHERE channel_id=? AND date_posted > ? ORDER BY date_posted DESC LIMIT 30", array($channelID, $microtime));
+		$messages = Database::selectMultiple("SELECT c.uni_id, u.handle, c.message, c.date_posted FROM chat_messages c INNER JOIN users u ON c.uni_id=u.uni_id WHERE c.channel_id=? AND c.date_posted > ? ORDER BY c.date_posted DESC LIMIT 30", array($channelID, $microtime));
 		
 		return array_reverse($messages);
 	}

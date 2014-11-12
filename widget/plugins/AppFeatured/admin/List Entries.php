@@ -24,7 +24,7 @@ $results = Database::selectMultiple("SELECT * FROM widget_featured LIMIT 0, 200"
 foreach($results as $entry)
 {
 	echo '
-	<div class="entry-row"><div class="entry-left"><a href="/admin/AppFeatured/Assign Entries?id=' . $entry['id'] . '"><img src="' . $widgetSync . '/assets/featured/' . ceil($entry['id'] / 1000) . '/' . $entry['id'] . '.jpg" /></a></div><div class="entry-right"><strong>' . $entry['title'] . '</strong><br />' . $entry['description'] . '<br /><span><a href="' . $entry['url'] . '">' . $entry['url'] . '</a></span></div></div>';
+	<div class="entry-row"><div class="entry-left"><a href="/admin/AppFeatured/Assign Entries?id=' . $entry['id'] . '"><img src="' . $widgetSync . '/assets/featured/' . ceil($entry['id'] / 1000) . '/' . $entry['id'] . '.jpg" /></a></div><div class="entry-right"><strong>' . $entry['title'] . ' (<a href="/admin/AppFeatured/Edit Entry?id=' . $entry['id'] . '">Edit</a>)</strong><br />' . $entry['description'] . '<br /><span><a href="' . $entry['url'] . '">' . $entry['url'] . '</a></span></div></div>';
 }
 
 // Display the Footer

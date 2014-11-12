@@ -25,6 +25,9 @@ AppAdmin::createParent("NHL", "Sports");
 AppAdmin::createParent("Rugby", "Sports");
 AppAdmin::createParent("Tennis", "Sports");
 
+AppAdmin::createParent("GoTrek", "Sports");
+
+
 // Basketball
 AppAdmin::createParent("NBA", "Basketball");
 
@@ -133,7 +136,7 @@ AppAdmin::assignEntryByTitle("Tech Community", "CurrentEvents", "communities", "
 
 // Tech
 AppAdmin::assignEntryByTitle("Book Club", "Tech", "communities", "featured");
-AppAdmin::assignEntryByTitle("Gaming Community", "Entertainment", "communities", "featured");
+AppAdmin::assignEntryByTitle("Gaming Community", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Music Community", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("News Community", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Politics Community", "Tech", "communities", "featured");
@@ -144,3 +147,11 @@ AppAdmin::assignEntryByTitle("Programming Community", "Tech", "communities", "fe
 AppAdmin::assignEntryByTitle("Web Development", "Tech", "communities", "featured");
 AppAdmin::assignEntryByTitle("Writing Community", "Tech", "communities", "featured");
 
+
+// Sports
+AppAdmin::assignEntryByTitle("MLB Community", "Sports", "communities", "featured");
+AppAdmin::assignEntryByTitle("NBA Community", "Sports", "communities", "featured");
+AppAdmin::assignEntryByTitle("NCAAF Community", "Sports", "communities", "featured");
+AppAdmin::assignEntryByTitle("NCAAM Community", "Sports", "communities", "featured");
+AppAdmin::assignEntryByTitle("NFL Community", "Sports", "communities", "featured");
+AppAdmin::assignEntryByTitle("NHL Community", "Sports", "communities", "featured");
