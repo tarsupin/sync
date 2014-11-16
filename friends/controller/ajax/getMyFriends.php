@@ -19,7 +19,7 @@ if($_POST['enc'] != Security::jsEncrypt($_POST['username']))
 if(!$uniID = User::getIDByHandle($_POST['username']))
 {
 	// Attempt to silently register the user so that the functions can work appropriately
-	if(!User::silentRegister($uniID))
+	if(!User::silentRegister($_POST['username']))
 	{
 		exit;
 	}
