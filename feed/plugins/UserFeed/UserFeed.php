@@ -297,7 +297,6 @@ abstract class UserFeed {
 		}
 		
 		// Prepare Values
-		$fastchatURL = URL::fastchat_social();
 		$socialURL = URL::unifaction_social();
 		$hashtagURL = URL::hashtag_unifaction_com();
 		
@@ -328,7 +327,7 @@ abstract class UserFeed {
 				<div class="c-feed-right">
 					<div class="c-feed-date feed-desktop">' . date("m/j/y", $coreData['date_posted']) . '</div>
 					<div class="c-feed-title"><a href="' . $coreData['url'] . '">' . $coreData['title'] . '</a></div>
-					<div class="c-feed-author feed-desktop">Written by <a href="' . $socialURL . '/' . $coreData['handle'] . '">' . $coreData['display_name'] . '</a> (<a href="' . $fastchatURL . '/' . $coreData['handle'] . '">@' . $coreData['handle'] . '</a>)</div>
+					<div class="c-feed-author feed-desktop">Written by <a href="' . $socialURL . '/' . $coreData['handle'] . '">' . $coreData['display_name'] . '</a> (<a href="' . $socialURL . '/' . $coreData['handle'] . '">@' . $coreData['handle'] . '</a>)</div>
 					<div class="c-feed-body">' . $coreData['description'] . '</div>';
 			
 			// Hashtag List
