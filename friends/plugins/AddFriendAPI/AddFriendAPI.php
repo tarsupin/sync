@@ -45,7 +45,7 @@ class AddFriendAPI extends API {
 			return false;
 		}
 		
-		// Force a friend update (if not a request)
+		// Force a friend update
 		return AppFriends::add($this->data['uni_id'], $this->data['friend_id']);
 	}
 }

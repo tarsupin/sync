@@ -45,16 +45,6 @@ class AppFriends_config {
 		");
 		
 		Database::exec("
-		CREATE TABLE IF NOT EXISTS `friends_requests`
-		(
-			`uni_id`				int(10)			unsigned	NOT NULL	DEFAULT '0',
-			`friend_id`				int(10)			unsigned	NOT NULL	DEFAULT '0',
-			
-			UNIQUE (`uni_id`, `friend_id`)
-		) ENGINE=InnoDB DEFAULT CHARSET=utf8 PARTITION BY KEY(uni_id) PARTITIONS 23;
-		");
-		
-		Database::exec("
 		CREATE TABLE IF NOT EXISTS `users_activity`
 		(
 			`uni_id`				int(10)			unsigned	NOT NULL	DEFAULT '0',

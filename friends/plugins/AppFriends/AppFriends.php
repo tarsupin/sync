@@ -129,38 +129,6 @@ abstract class AppFriends {
 	}
 	
 	
-/****** Create a friend request ******/
-	public static function request
-	(
-		$uniID			// <int> The UniID of the user requesting the friendship.
-	,	$friendID		// <int> The UniID of the friend.
-	)					// RETURNS <bool> TRUE if the friend request is added, FALSE on failure.
-	
-	// AppFriends::request($uniID, $friendID);
-	{
-		// Check if the user has already received a request from this user
-		if($check = Database::selectValue("SELECT friend_id FROM friends_requests WHERE uni_id=? AND friend_id=? LIMIT 1", array($friendID, $uniID)))
-		{
-			// The user is approving the friend request
-			return self::add($friendID, $uniID);
-		}
-		
-		// Verify Users
-		if(!self::verifyUsersRegistered($uniID, $friendID))
-		{
-			return false;
-		}
-		
-		// Create the friend request
-		Database::query("REPLACE INTO friends_requests (uni_id, friend_id) VALUES (?, ?)", array($uniID, $friendID));
-		
-		// Send a notification to alert the user of this friend request
-		Notification::create($uniID, URL::unifaction_social() . "/friends/requests", "You have received a friend request.");
-		
-		return true;
-	}
-	
-	
 /****** Add a friend ******/
 	public static function add
 	(
@@ -181,14 +149,7 @@ abstract class AppFriends {
 		// Add the friends into the friend list
 		if($pass = Database::query("REPLACE INTO friends_list (uni_id, friend_id) VALUES (?, ?)", array($uniID, $friendID)))
 		{
-			if($pass = Database::query("REPLACE INTO friends_list (uni_id, friend_id) VALUES (?, ?)", array($friendID, $uniID)))
-			{
-				// Purge the requests
-				if($pass = Database::query("DELETE FROM friends_requests WHERE uni_id=? AND friend_id=? LIMIT 1", array($uniID, $friendID)))
-				{
-					$pass = Database::query("DELETE FROM friends_requests WHERE uni_id=? AND friend_id=? LIMIT 1", array($friendID, $uniID));
-				}
-			}
+			$pass = Database::query("REPLACE INTO friends_list (uni_id, friend_id) VALUES (?, ?)", array($friendID, $uniID));
 		}
 		
 		return Database::endTransaction($pass);
