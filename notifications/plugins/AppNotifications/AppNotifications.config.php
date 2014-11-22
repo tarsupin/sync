@@ -27,7 +27,7 @@ class AppNotifications_config {
 		(
 			`uni_id`				int(10)			unsigned	NOT NULL	DEFAULT '0',
 			
-			`url`					varchar(100)				NOT NULL	DEFAULT '',
+			`url`					varchar(150)				NOT NULL	DEFAULT '',
 			`message`				varchar(120)				NOT NULL	DEFAULT '',
 			
 			`date_created`			int(10)			unsigned	NOT NULL	DEFAULT '0',
