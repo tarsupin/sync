@@ -36,7 +36,7 @@ if(isset($_GET['action']))
 				// Gather details about this content
 				if($feedData = FeedCore::get($getData[0]))
 				{
-					Share::chatArticle(Me::$id, $feedData['image_url'], "", $feedData['blurb'], $feedData['title'], $feedData['url'], $feedData['handle'], "article");
+					
 				}
 			}
 			break;
@@ -48,7 +48,7 @@ if(isset($_GET['action']))
 				// Gather details about this content
 				if($feedData = FeedCore::get($getData[0]))
 				{
-					Share::socialArticle(Me::$id, $feedData['title'], $feedData['blurb'], $feedData['url'], $feedData['image_url'], "", "article");
+					
 				}
 			}
 			break;
