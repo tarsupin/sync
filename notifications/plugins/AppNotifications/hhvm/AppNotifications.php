@@ -28,7 +28,7 @@ abstract class AppNotifications {
 	
 	// $notifications = AppNotifications::get($uniID, [$page], [$returnNum]);
 	{
-		return Database::selectMultiple("SELECT url, message, date_created FROM notifications WHERE uni_id=? ORDER BY date_created DESC LIMIT " . (($page -1) * $returnNum) . ", " . ($returnNum + 0), array($uniID));
+		return Database::selectMultiple("SELECT url, message, date_created FROM notifications WHERE uni_id=? OR uni_id=? ORDER BY date_created DESC LIMIT " . (($page -1) * $returnNum) . ", " . ($returnNum + 0), array($uniID, 0));
 	}
 	
 	
@@ -49,7 +49,14 @@ abstract class AppNotifications {
 		}
 		
 		// Update the user's notification count
-		self::incrementCount($uniID);
+		if($uniID > 0)
+		{
+			self::incrementCount($uniID);
+		}
+		else
+		{
+			self::incrementGlobalCount();
+		}
 		
 		// Insert a notification
 		return Database::query("INSERT INTO notifications (uni_id, url, message, date_created) VALUES (?, ?, ?, ?)", array($uniID, $url, $message, time()));
@@ -147,6 +154,17 @@ abstract class AppNotifications {
 		
 		// Update the notification count
 		return Database::query("UPDATE users SET notify_count=notify_count+1 WHERE uni_id=? LIMIT 1", array($uniID));
+	}
+	
+/****** Increment the number of all users' notifications by 1 ******/
+	public static function incrementGlobalCount
+	(
+	): bool					// RETURNS <bool> TRUE if successfully added, FALSE on failure.
+	
+	// AppNotifications::incrementGlobalCount();
+	{		
+		// Update the notification count
+		return Database::query("UPDATE users SET notify_count=notify_count+1", array());
 	}
 	
 	

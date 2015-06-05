@@ -27,7 +27,7 @@ if(!$userData = User::getDataByHandle($_POST['username'], "uni_id, notify_count"
 }
 
 // Get the list of notifications for the user
-$notifications = AppNotifications::get((int) $userData['uni_id'], 1, 5);
+$notifications = AppNotifications::get((int) $userData['uni_id'], 1, max($userData['notify_count'], 5));
 
 // Return the JSON
 echo json_encode(array("notification_count" => $userData['notify_count'], "notifications" => $notifications));
