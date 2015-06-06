@@ -28,7 +28,7 @@ abstract class AppNotifications {
 	
 	// $notifications = AppNotifications::get($uniID, [$page], [$returnNum]);
 	{
-		return Database::selectMultiple("SELECT url, message, date_created FROM notifications WHERE uni_id=? OR uni_id=? ORDER BY date_created DESC LIMIT " . (($page -1) * $returnNum) . ", " . ($returnNum + 0), array($uniID, 0));
+		return Database::selectMultiple("SELECT uni_id, url, message, date_created FROM notifications WHERE uni_id=? OR uni_id=? ORDER BY date_created DESC LIMIT " . (($page -1) * $returnNum) . ", " . ($returnNum + 0), array($uniID, 0));
 	}
 	
 	
